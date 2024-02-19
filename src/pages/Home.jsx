@@ -39,8 +39,6 @@ export default function Home() {
                     console.log(error)
                 })
     }
-    
-
 
     useState(() => {
         getMeals()
@@ -48,14 +46,25 @@ export default function Home() {
     },[])
 
     return (
-        <section className="w-full h-full bg-[#0E1325]">
-            <header className='relative p-[12px]'>
-                <img className='rounded-lg' src={heroImg}></img>
-                <img className='absolute bottom-[80px] right-[240px]' src={heroTextImg}></img>
+        <section className="w-screen h-full bg-[#0E1325]">
+            <header className='w-auto relative p-[12px]'>
+                <img className='rounded-lg w-full' src={heroImg}></img>
+                <img className='absolute md:w-[350px] lg:w-[400px] bottom-[20px] lg:bottom-[40px] xl:bottom-[80px] right-[24px] lg:right-[120px] xl:right-[240px]' src={heroTextImg}></img>
             </header>
-            <main className='flex h-fit mt-[32px]'>
+            <main className='flex flex-col md:flex-row justify-center h-fit w-screen mt-[32px] gap-[40px]'>
                 <ListOfCategoryMeals meals={meals}/>
+                <section className='flex flex-col gap-[40px]'>
+                    <div className='flex justify-between '>
+                        <input 
+                            className='border-2 border-[#394150] rounded-3xl py-[12px] px-[24px] bg-[#0E1325]'
+                            placeholder='Search recipes and more...'
+                        />
+                        <select className='px-[24px] py-[12px] rounded-3xl'>
+                            <option>Sort by:Name</option>
+                        </select>
+                    </div>
                 <ListOfRecipes recipes={recipes}/>
+                </section>
             </main>
         </section>
     )
