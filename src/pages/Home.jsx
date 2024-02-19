@@ -5,11 +5,13 @@ import { useState } from 'react'
 
 import ListOfCategoryMeals from '../components/ListOfCategoryMeals'
 import ListOfRecipes from '../components/ListOfRecipes'
+import { useEffect } from 'react'
 
 export default function Home() {
 
     const [meals, setMeals] = useState([])
     const [recipes, setRecipes] = useState([])
+    const [category, setCategory] = useState()
 
 
     const getMeals = () => {
@@ -39,12 +41,19 @@ export default function Home() {
                     console.log(error)
                 })
     }
+    const handleMealCategory = (category) => {
+        console.log(category)
+        setCategory(category)
+    }
 
-    useState(() => {
+    useEffect(() => {
         getMeals()
-        getRecipes()
+        getRecipes(category)
     },[])
 
+    useEffect(() =>{
+        getRecipes(category)
+    },[category])
     return (
         <section className="w-screen h-full bg-[#0E1325]">
             <header className='w-auto relative p-[12px]'>
@@ -52,7 +61,7 @@ export default function Home() {
                 <img className='absolute md:w-[350px] lg:w-[400px] bottom-[20px] lg:bottom-[40px] xl:bottom-[80px] right-[24px] lg:right-[120px] xl:right-[240px]' src={heroTextImg}></img>
             </header>
             <main className='flex flex-col md:flex-row justify-center h-fit w-screen mt-[32px] gap-[40px]'>
-                <ListOfCategoryMeals meals={meals}/>
+                <ListOfCategoryMeals  onMealClick={handleMealCategory}  meals={meals}/>
                 <section className='flex flex-col gap-[40px]'>
                     <div className='flex justify-between '>
                         <input 

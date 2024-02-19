@@ -1,16 +1,20 @@
 import { useState } from "react"
 import CategoryMeals from "./CategoryMeals"
 
-export default function ListOfCategoryMeals({meals}) {
+export default function ListOfCategoryMeals({meals, onMealClick}) {
     const [totalPosition, setTotalPosition] = useState(Math.ceil(meals.length / 6))
     const [position, setPosition] = useState(0)
 
+    const handleMealCategory = (category) => {
+        onMealClick(category)    
+
+    }
     return (    
         <section className="flex flex-col h-fit px-[40px] md:p-[0] gap-[32px] bg-[#0E1325] md:w-[250px] ">
             <span className="text-[#E5E7EB] text-2xl font-semibold" id='span-categories'>Categories</span>
             <div className=" grid grid-cols-2 md:flex md:flex-col h-fit gap-[12px]">
             {              
-                meals && meals.slice(0,6).map( meal => <CategoryMeals key={meal.id} meal={meal}/>)
+                meals && meals.slice(0,6).map( meal => <CategoryMeals onMealClick={handleMealCategory} key={meal.id} meal={meal}/>)
             }
             </div>
             <div className="flex justify-between">
