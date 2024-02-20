@@ -1,28 +1,50 @@
 import RecipeCard from "./RecipeCard"
+import ButtonLeftImg from '../images/Button_left.svg'
+import ButtonRightImg from '../images/Button_right.svg'
+import { useState } from "react"
 
 export default function ListOfRecipes({recipes}) {
 
-            
+    const totalPosition = Math.ceil(recipes.length/6)
+
+    const [position, setPosition] = useState(0)
+
+    const showNextCategories = () => {
+        const newPos = position + 1
+
+        if (newPos < totalPosition ) {
+            setPosition(newPos)
+        }
+    }
+    const showPrevCategories = () => {
+        const newPos = position - 1
+
+        if (newPos > -1 ) {
+            setPosition(newPos)
+        }
+    }
     return(
-            <div className="flex flex-col gap-[40px]">
+            <div className="flex flex-col gap-[40px] items-center">
                 <section className="grid lg:grid-cols-2 xl:grid-cols-3 gap-[32px] w-fit"> 
                 { 
-                    recipes && recipes.slice(0,6).map( recipe => <RecipeCard key={recipe.id} recipe={recipe}/>)
+                    recipes && recipes.slice(position * 6,position * 6 + 6).map( recipe => <RecipeCard key={recipe.id} recipe={recipe}/>)
                 }   
                 </section>
-                <div className="flex justify-between mb-[40px]">
-                    <button>
-                        <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-chevron-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="#394150" />
-                            <path d="M15 6l-6 6l6 6" />
-                        </svg>
-                    </button>
-                    <button>
-                        <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-chevron-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="#394150"/>
-                            <path d="M9 6l6 6l-6 6" />
-                        </svg>
-                    </button>
+                <div className="flex justify-between mb-[40px] w-full ">
+                <button>
+                    <img 
+                        onClick={showPrevCategories} 
+                        src={ButtonLeftImg}
+                        className={position === 0 ? "opacity-0" : "opacity-100"  }
+                    ></img>
+                </button>
+                <button>
+                    <img 
+                        onClick={showNextCategories} 
+                        src={ButtonRightImg}
+                        className={position === totalPosition - 1? "opacity-0" : "opacity-100"  }
+                    ></img>
+                </button>
                 </div>
             </div>
 

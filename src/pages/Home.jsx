@@ -42,34 +42,40 @@ export default function Home() {
                 })
     }
     const handleMealCategory = (category) => {
-        console.log(category)
-        setCategory(category)
+        if (category) {
+            console.log(category)
+            setCategory(category)
+        }
     }
-
+    useEffect(() =>{
+        getRecipes(category)
+    },[category])
+    
     useEffect(() => {
         getMeals()
         getRecipes(category)
     },[])
 
-    useEffect(() =>{
-        getRecipes(category)
-    },[category])
+
+
     return (
         <section className="w-screen h-full bg-[#0E1325]">
             <header className='w-auto relative p-[12px]'>
                 <img className='rounded-lg w-full' src={heroImg}></img>
-                <img className='absolute md:w-[350px] lg:w-[400px] bottom-[20px] lg:bottom-[40px] xl:bottom-[80px] right-[24px] lg:right-[120px] xl:right-[240px]' src={heroTextImg}></img>
+                <img className='absolute w-[200px] sm:w-[w-250px] md:w-[300px] lg:w-[380px] bottom-[20px] lg:bottom-[40px] xl:bottom-[80px] right-[24px] lg:right-[120px] xl:right-[240px]' src={heroTextImg}></img>
             </header>
-            <main className='flex flex-col md:flex-row justify-center h-fit w-screen mt-[32px] gap-[40px]'>
+            <main className='flex flex-col lg:flex-row justify-center h-fit w-screen mt-[32px] gap-[40px]'>
                 <ListOfCategoryMeals  onMealClick={handleMealCategory}  meals={meals}/>
-                <section className='flex flex-col gap-[40px]'>
-                    <div className='flex justify-between '>
+                <section className='flex flex-col gap-[40px] px-[40px] lg:p-[0]'>
+                    <div className='flex justify-between gap-[20px] '>
                         <input 
-                            className='border-2 border-[#394150] rounded-3xl py-[12px] px-[24px] bg-[#0E1325]'
+                            className='w-[380px] border-2 border-[#394150] rounded-3xl py-[12px] px-[24px] bg-[#0E1325]'
                             placeholder='Search recipes and more...'
                         />
                         <select className='px-[24px] py-[12px] rounded-3xl'>
-                            <option>Sort by:Name</option>
+                            <option value="name" className='font-bold'>Sort by:Name</option>
+                            <option value="id">Sort by:Id</option>
+
                         </select>
                     </div>
                 <ListOfRecipes recipes={recipes}/>
