@@ -12,6 +12,7 @@ export default function Home() {
     const [meals, setMeals] = useState([])
     const [recipes, setRecipes] = useState([])
     const [category, setCategory] = useState()
+    const [sortBy, setSortBy] = useState('name');
 
 
     const getMeals = () => {
@@ -47,6 +48,12 @@ export default function Home() {
             setCategory(category)
         }
     }
+
+    const handleSortChange = (event) => {
+        setSortBy(event.target.value)
+
+    }
+
     useEffect(() =>{
         getRecipes(category)
     },[category])
@@ -72,13 +79,12 @@ export default function Home() {
                             className='w-[380px] border-2 border-[#394150] rounded-3xl py-[12px] px-[24px] bg-[#0E1325]'
                             placeholder='Search recipes and more...'
                         />
-                        <select className='px-[24px] py-[12px] rounded-3xl'>
-                            <option value="name" className='font-bold'>Sort by:Name</option>
+                        <select className='px-[24px] py-[12px] rounded-3xl' onChange={handleSortChange}>
+                            <option value='name'>Sort by:Name</option>
                             <option value="id">Sort by:Id</option>
-
                         </select>
                     </div>
-                <ListOfRecipes recipes={recipes}/>
+                <ListOfRecipes recipes={recipes} sort={sortBy}/>
                 </section>
             </main>
         </section>
