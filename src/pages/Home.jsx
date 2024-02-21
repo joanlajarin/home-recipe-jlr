@@ -144,7 +144,7 @@ export default function Home() {
                     <div className='flex justify-between gap-[20px] '>
                         <input 
                             type="text"
-                            className='w-[380px] border-2 border-[#394150] rounded-3xl py-[12px] px-[24px] bg-[#0E1325] text-white'
+                            className='bg-[url("src/images/Search.svg")] bg-no-repeat bg-[18px] pl-[50px] placeholder-[#394150] w-[380px] border-2 border-[#394150] rounded-3xl py-[12px] px-[24px] bg-[#0E1325] text-white'
                             placeholder='Search recipes and more...'
                             onChange={(e) => setValueInput(e.target.value)}
                             onKeyDown={handleKeyDown}
