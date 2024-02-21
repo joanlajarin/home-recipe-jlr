@@ -12,7 +12,8 @@ export default function Home() {
     const [meals, setMeals] = useState([])
     const [recipes, setRecipes] = useState([])
     const [category, setCategory] = useState()
-    const [sortBy, setSortBy] = useState('name');
+    const [sortBy, setSortBy] = useState('name')
+    const [valueInput, setValueInput] = useState('')
 
 
     const getMeals = () => {
@@ -22,8 +23,7 @@ export default function Home() {
                 .then( data => {
                     console.log(data)
                     setMeals(data.categories)
-                    console.log(typeof meals)
-                }
+                    }
                 )
                 .catch(error => {
                    console.log(error) 
@@ -63,8 +63,75 @@ export default function Home() {
         getRecipes(category)
     },[])
 
+    const handleKeyDown = (event) => {
+        const uniqueRecipes = {}
+        if (event.key === 'Enter') {
+            //get recipes with the value of input searching for name
+            fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${valueInput}`)
+            .then(response => response.json())
+                .then( data => {
+                    console.log(data.meals)
+                    if(data.meals) {
+                        data.meals.forEach(obj => {
+                            const key = obj.idMeal 
+                            if (!uniqueRecipes.hasOwnProperty(key)) {
+                                uniqueRecipes[key] = obj;
+                            }
+                        })                    } 
+                    return fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?a=${valueInput}`)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data )
+                    if(data.meals) {
+                        data.meals.forEach(obj => {
+                            const key = obj.idMeal 
+                            if (!uniqueRecipes.hasOwnProperty(key)) {
+                                uniqueRecipes[key] = obj;
+                            }
+                        })                      
+                    }
+                    return fetch(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${valueInput}`)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data )
+                    if(data.meals) {
+                        data.meals.forEach(obj => {
+                            const key = obj.idMeal 
+                            if (!uniqueRecipes.hasOwnProperty(key)) {
+                                uniqueRecipes[key] = obj;
+                            }
+                        })  
+                    }
+                    const uniqueArray = Object.values(uniqueRecipes);
+     
+                    setRecipes(uniqueArray)
+                })
+                .catch(error => {
+                    console.log(error)
+                })
+            }
+            //remove highlight of the categories
+      }
 
+    const removeStyle = () => {
 
+        //select all meals
+        //remove all styles of the meals
+        //add style to the id selected
+
+        if (lastClickedId) {
+            const prevMeal = document.getElementById(`meal-${lastClickedId}`)
+            const prevText = document.getElementById(`span-${lastClickedId}`)
+            if (prevMeal) {
+                prevMeal.classList.remove('bg-[#FEBD2E]')
+                prevText.classList.remove('text-black')
+                prevMeal.classList.add('text-[#E5E7EB]')
+            }
+        }
+    }
+    
     return (
         <section className="w-screen h-full bg-[#0E1325]">
             <header className='w-auto relative p-[12px]'>
@@ -76,13 +143,20 @@ export default function Home() {
                 <section className='flex flex-col gap-[40px] px-[40px] lg:p-[0]'>
                     <div className='flex justify-between gap-[20px] '>
                         <input 
-                            className='w-[380px] border-2 border-[#394150] rounded-3xl py-[12px] px-[24px] bg-[#0E1325]'
+                            type="text"
+                            className='w-[380px] border-2 border-[#394150] rounded-3xl py-[12px] px-[24px] bg-[#0E1325] text-white'
                             placeholder='Search recipes and more...'
+                            onChange={(e) => setValueInput(e.target.value)}
+                            onKeyDown={handleKeyDown}
                         />
-                        <select className='px-[24px] py-[12px] rounded-3xl' onChange={handleSortChange}>
-                            <option value='name'>Sort by:Name</option>
-                            <option value="id">Sort by:Id</option>
-                        </select>
+                        <div 
+                            className='flex items-center px-[24px] py-[12px] bg-[#E5E7EB] rounded-3xl'>
+                            <label className='font-medium'>Sort by: </label>
+                            <select className='pr-[10px] font-bold	' onChange={handleSortChange}>
+                                <option value='name'>Name</option>
+                                <option value="id">Id</option>
+                            </select>
+                        </div>
                     </div>
                 <ListOfRecipes recipes={recipes} sort={sortBy}/>
                 </section>

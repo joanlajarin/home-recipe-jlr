@@ -9,8 +9,6 @@ export default function ListOfRecipes({recipes, sort}) {
 
     const [position, setPosition] = useState(0)
 
-    const [sortId, setSortId] = useState(false)
-
     const showNextCategories = () => {
         const newPos = position + 1
 
@@ -24,14 +22,6 @@ export default function ListOfRecipes({recipes, sort}) {
         if (newPos > -1 ) {
             setPosition(newPos)
         }
-    }
-
-    const sortById = () => {
-        setSortId(true)
-    }
-
-    const sortByName = () => {
-        setSortId(false)
     }
 
     return(
