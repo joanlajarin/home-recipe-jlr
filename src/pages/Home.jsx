@@ -1,4 +1,3 @@
-import { data } from 'autoprefixer'
 import heroImg from '../images/hero-imagehc.jpg'
 import heroTextImg from '../images/hero-text.svg'
 import { useState } from 'react'
@@ -115,22 +114,7 @@ export default function Home() {
             //remove highlight of the categories
       }
 
-    const removeStyle = () => {
 
-        //select all meals
-        //remove all styles of the meals
-        //add style to the id selected
-
-        if (lastClickedId) {
-            const prevMeal = document.getElementById(`meal-${lastClickedId}`)
-            const prevText = document.getElementById(`span-${lastClickedId}`)
-            if (prevMeal) {
-                prevMeal.classList.remove('bg-[#FEBD2E]')
-                prevText.classList.remove('text-black')
-                prevMeal.classList.add('text-[#E5E7EB]')
-            }
-        }
-    }
     
     return (
         <section className="w-screen h-full bg-[#0E1325]">
