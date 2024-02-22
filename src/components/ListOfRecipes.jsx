@@ -2,12 +2,14 @@ import RecipeCard from "./RecipeCard"
 import ButtonLeftImg from '../images/Button_left.svg'
 import ButtonRightImg from '../images/Button_right.svg'
 import { useState } from "react"
+import { useEffect } from "react"
 
-export default function ListOfRecipes({recipes, sort}) {
+export default function ListOfRecipes({recipes, sort, resetPosition }) {
 
     const totalPosition = Math.ceil(recipes.length/6)
 
     const [position, setPosition] = useState(0)
+    const [shouldResetPosition, setShouldResetPosition] = useState(false)
 
     const showNextCategories = () => {
         const newPos = position + 1
@@ -23,6 +25,13 @@ export default function ListOfRecipes({recipes, sort}) {
             setPosition(newPos)
         }
     }
+
+    useEffect(() => {
+        if (resetPosition && !shouldResetPosition) {
+            setPosition(0)
+            setShouldResetPosition(true)
+        }
+    }, [resetPosition, shouldResetPosition])
 
     return(
             <div className="flex flex-col gap-[40px] items-center">

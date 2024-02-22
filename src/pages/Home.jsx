@@ -13,6 +13,7 @@ export default function Home() {
     const [category, setCategory] = useState()
     const [sortBy, setSortBy] = useState('name')
     const [valueInput, setValueInput] = useState('')
+    const [resetPosition , setResetPosition] = useState('')
 
 
     const getMeals = () => {
@@ -30,9 +31,12 @@ export default function Home() {
                 .then( data => setRecipes(data.meals))  
                 .catch(error => console.log(error))
     }
-    const handleMealCategory = (category) => {
+    const handleMealCategory = (category, resetPosition ) => {
         if (category) {
             setCategory(category)
+        }
+        if(resetPosition) {
+            setResetPosition(resetPosition)
         }
     }
 
@@ -129,7 +133,7 @@ export default function Home() {
                             </select>
                         </div>
                     </div>
-                <ListOfRecipes recipes={recipes} sort={sortBy}/>
+                <ListOfRecipes recipes={recipes} sort={sortBy} showRecipes={resetPosition}/>
                 </section>
             </main>
         </section>

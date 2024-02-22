@@ -1,13 +1,7 @@
-import { useState } from "react"
-
 export default function CategoryMeals({meal, onMealClick}) {
- 
-    const [lastClickedId, setLastClickedId] = useState("")
 
     const showRecipes = () => {
-
-        setLastClickedId(meal.idCategory)
-        onMealClick(meal.strCategory, meal.idCategory )
+        onMealClick(meal.strCategory, meal.idCategory, true )
     }
 
     return(

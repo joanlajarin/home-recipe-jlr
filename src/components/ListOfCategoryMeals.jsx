@@ -10,17 +10,15 @@ export default function ListOfCategoryMeals({meals, onMealClick}) {
 
     const [position, setPosition] = useState(0)
 
-    const handleMealCategory = (category, id) => {
+    const handleMealCategory = (category, id, resetPosition) => {
         changeHighlight(id)
-        onMealClick(category)    
+        onMealClick(category, resetPosition)    
     }
 
     const changeHighlight = (id)  => {
         
-        console.log(id)
-
         const categoryMeals = document.querySelectorAll('.category-meals')
-        console.log(categoryMeals) 
+
         categoryMeals.forEach( category => {
             const num = parseInt(category.id.match(/\d+/)[0])
 
@@ -52,9 +50,6 @@ export default function ListOfCategoryMeals({meals, onMealClick}) {
 
     useEffect(() => {
         changeHighlight(3)
-     // //  const categoryMeals = document.querySelectorAll('.category-meals')
-     // //  console.log(categoryMeals) 
-     // //  categoryMeals.forEach( category => { console.log(category)})
       },[])
 
     return (    
@@ -62,7 +57,7 @@ export default function ListOfCategoryMeals({meals, onMealClick}) {
             <span className="text-[#E5E7EB] text-2xl font-semibold" id='span-categories'>Categories</span>
             <div className=" grid grid-cols-2 lg:flex lg:flex-col h-fit gap-[12px]">
             {              
-                meals &&  meals.slice(position * 6,position * 6 + 6).map( meal => <CategoryMeals key={meal.id} onMealClick={handleMealCategory} meal={meal}/>)
+                meals && meals.slice(position * 6,position * 6 + 6).map( meal => <CategoryMeals key={meal.id} onMealClick={handleMealCategory} meal={meal}/>)
             }
             </div>
             <div className="flex justify-between">
