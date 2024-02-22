@@ -19,6 +19,6 @@ html,body,#root {
 
 }
 .bg-search-image {
-    background-image: url('src/images/Search.svg');
+    background-image: url('Search.svg');
     /* Other background properties like size, position, repeat, etc. can be added here */
   }
