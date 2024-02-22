@@ -22,14 +22,9 @@ export default function ListOfCategoryMeals({meals, onMealClick}) {
         const categoryMeals = document.querySelectorAll('.category-meals')
         console.log(categoryMeals) 
         categoryMeals.forEach( category => {
-            console.log(category)
-            console.log(category.id)
-            console.log(id)
             const num = parseInt(category.id.match(/\d+/)[0])
-            console.log(num)
 
             if(parseInt(num) === parseInt(id)) {
-                    console.log(category.classList)
                 category.classList.add('bg-[#FEBD2E]')
                 category.classList.add('text-black')
 

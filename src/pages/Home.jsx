@@ -19,38 +19,25 @@ export default function Home() {
         const url = 'https://www.themealdb.com/api/json/v1/1/categories.php'
         fetch(url)
             .then(response => response.json())
-                .then( data => {
-                    console.log(data)
-                    setMeals(data.categories)
-                    }
-                )
-                .catch(error => {
-                   console.log(error) 
-                }) 
+                .then( data => setMeals(data.categories))
+                .catch(error => console.log(error)) 
     }
 
     const getRecipes = (category = 'Dessert') => {
         const url  = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`
         fetch(url)
             .then(response => response.json())
-                .then( data => {
-                    console.log(data.meals)
-                    setRecipes(data.meals)
-                })  
-                .catch(error => {
-                    console.log(error)
-                })
+                .then( data => setRecipes(data.meals))  
+                .catch(error => console.log(error))
     }
     const handleMealCategory = (category) => {
         if (category) {
-            console.log(category)
             setCategory(category)
         }
     }
 
     const handleSortChange = (event) => {
         setSortBy(event.target.value)
-
     }
 
     useEffect(() =>{

@@ -11,7 +11,6 @@ export default function RecipeCard({recipe}) {
         fetch(url)
             .then( response => response.json())
                 .then(data => {
-                    console.log(data.meals[0])
                     navigate('/detailRecipe', {state: {detailRecipe: data.meals[0]}})
                 })
     }

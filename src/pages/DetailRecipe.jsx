@@ -16,8 +16,6 @@ export default function Home() {
     }
 
     useEffect(() => {
-        console.log("detailRecipe")
-        console.log(location.state)
         setRecipe(location.state.detailRecipe)
     },[])
 
