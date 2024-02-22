@@ -18,3 +18,7 @@ html,body,#root {
     font-family: "Playfair Display", serif;
 
 }
+.bg-search-image {
+    background-image: url('src/images/Search.svg');
+    /* Other background properties like size, position, repeat, etc. can be added here */
+  }

@@ -114,20 +114,20 @@ export default function Home() {
                 <img className='absolute w-[200px] sm:w-[w-250px] md:w-[300px] lg:w-[380px] bottom-[20px] lg:bottom-[40px] xl:bottom-[80px] right-[24px] lg:right-[120px] xl:right-[240px]' src={heroTextImg}></img>
             </header>
             <main className='flex flex-col lg:flex-row justify-center h-fit w-screen mt-[20px] gap-[40px]'>
-                <ListOfCategoryMeals  onMealClick={handleMealCategory}  meals={meals}/>
+                <ListOfCategoryMeals onMealClick={handleMealCategory} meals={meals}/>
                 <section className='flex flex-col gap-[40px] px-[40px] lg:p-[0]'>
                     <div className='flex justify-between gap-[20px] '>
                         <input 
                             type="text"
-                            className='bg-[url("src/images/Search.svg")] bg-no-repeat bg-[18px] pl-[50px] placeholder-[#394150] w-[380px] border-2 border-[#394150] rounded-3xl py-[12px] px-[24px] bg-[#0E1325] text-white'
+                            className='bg-search-image bg-no-repeat bg-[18px] pl-[50px] placeholder-[#394150] w-[380px] border-2 border-[#394150] rounded-3xl py-[12px] px-[24px] bg-[#0E1325] text-white'
                             placeholder='Search recipes and more...'
                             onChange={(e) => setValueInput(e.target.value)}
                             onKeyDown={handleKeyDown}
                         />
                         <div 
-                            className='flex items-center px-[24px] py-[12px] bg-[#E5E7EB] rounded-3xl'>
+                            className='flex items-center text-[14px] px-[24px] py-[10px] bg-[#E5E7EB] rounded-3xl'>
                             <label className='font-medium'>Sort by: </label>
-                            <select className='pr-[10px] font-bold	' onChange={handleSortChange}>
+                            <select className='pr-[10px] font-bold' onChange={handleSortChange}>
                                 <option value='name'>Name</option>
                                 <option value="id">Id</option>
                             </select>

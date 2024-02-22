@@ -9,7 +9,7 @@ export default function CategoryMeals({meal, onMealClick}) {
             
             id={`meal-${meal.idCategory}`}
             onClick={showRecipes} 
-            className='category-meals relative flex items-center overflow-hidden h-[64px] lg:w-[250px] border  rounded-lg border-[#394150] text-[#E5E7EB]'
+            className='text-[12px] category-meals relative flex items-center overflow-hidden h-[64px] lg:w-[250px] border  rounded-lg border-[#394150] text-[#E5E7EB]'
         >
             <img className='absolute left-[-40px] w-[80px] rounded-xl' src={meal.strCategoryThumb}></img>
             <span 
