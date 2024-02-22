@@ -113,7 +113,7 @@ export default function Home() {
                 <img className='rounded-lg w-full' src={heroImg}></img>
                 <img className='absolute w-[200px] sm:w-[w-250px] md:w-[300px] lg:w-[380px] bottom-[20px] lg:bottom-[40px] xl:bottom-[80px] right-[24px] lg:right-[120px] xl:right-[240px]' src={heroTextImg}></img>
             </header>
-            <main className='flex flex-col lg:flex-row justify-center h-fit w-screen mt-[28px] gap-[40px]'>
+            <main className='flex flex-col lg:flex-row justify-center h-fit w-screen mt-[20px] gap-[40px]'>
                 <ListOfCategoryMeals  onMealClick={handleMealCategory}  meals={meals}/>
                 <section className='flex flex-col gap-[40px] px-[40px] lg:p-[0]'>
                     <div className='flex justify-between gap-[20px] '>
